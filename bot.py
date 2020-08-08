@@ -67,16 +67,21 @@ async def reset(context):
     for member in members:
         for course in courses:
             unregister = get(context.message.author.guild.roles, name=course)
-            await member.remove_roles(unregister)
+            try:
+                print(f"Attempting to remove {unregister} from {member}")
+                await member.remove_roles(unregister)
+            except:
+                print("User doesn't have roll!")
 
         role = get(context.message.author.guild.roles, name="Unregistered")
+        
+        print(f"Attempting to add {role} to {member}")
         await member.add_roles(role)
 
-        await member.create_dm()
-        await member.dm_channel.send(f'Welcome, {member.name} to Cybersecurity Central. In order to gain access to your class\'s channel you must register with the command below in the role call channel. \nIn order to register you must do the following: \n\n!register <firstname> <lastname> <CSE---->\nExample: !register Joshua Connolly CSE4820\n\nIf you have any problems registering, please reach out to a student moderator')
+        #await member.create_dm()
+        #await member.dm_channel.send(f'Welcome, {member.name} to Cybersecurity Central. In order to gain access to your class\'s channel you must register with the command below in the role call channel. \nIn order to register you must do the following: \n\n!register <firstname> <lastname> <CSE---->\nExample: !register Joshua Connolly CSE4820\n\nIf you have any problems registering, please reach out to a student moderator')
 
-
-
+            
 #@bot.command(name="md5sum", help="Provide md5 hash of the value provided. i.e. !md5sum <value>")
 #async def md5sum(context, value=None):
 #    if value:
