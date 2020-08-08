@@ -39,12 +39,6 @@ async def register_name(context, first=None, last=None, course=None):
             await context.send(f"{course} is not an offered course in the cyber track. Please reregister.")
             return
 
-        #requestee = str(context.message.author)
-        #request = str(member)
-        #if requestee != request:
-        #    await context.send(f"Cant register other users! Nice try.")
-        #    return
-
         await member.edit(nick=name)
 
         role = get(member.guild.roles, name=course)
